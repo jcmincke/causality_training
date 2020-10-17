@@ -53,3 +53,24 @@ def wrap_4(f, var1, var2, var3, var4):
         v4 = val(scm, ctx, var4)
         return f(v1, v2, v3, v4)
     return f1
+
+def wrap_5(f, var1, var2, var3, var4, var5):
+    def f2(scm, ctx):
+        v1 = val(scm, ctx, var1)
+        v2 = val(scm, ctx, var2)
+        v3 = val(scm, ctx, var3)
+        v4 = val(scm, ctx, var4)
+        v5 = val(scm, ctx, var5)
+        return f(v1, v2, v3, v4, v5)
+    return f2
+
+def wrap_6(f, var1, var2, var3, var4, var5, var6):
+    def f2(scm, ctx):
+        v1 = val(scm, ctx, var1)
+        v2 = val(scm, ctx, var2)
+        v3 = val(scm, ctx, var3)
+        v4 = val(scm, ctx, var4)
+        v5 = val(scm, ctx, var5)
+        v6 = val(scm, ctx, var6)
+        return f(v1, v2, v3, v4, v5, v6)
+    return f2

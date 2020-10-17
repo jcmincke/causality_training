@@ -599,3 +599,10 @@ prob_do_z_slow(pdf,  x0, y0)
 pdf = pdf_do
 x0 = 14
 y0=21
+
+
+def f (a, b):
+    return a + b
+
+
+f(*[1, 2])
