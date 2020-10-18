@@ -69,7 +69,7 @@ def f_ca_season(ca, season, season_mult):
 
 def f_y(ca, season): return ca * (1 + season * 1)
 
-exo = ["s", "seg", "p", "dp", "ca_0", "ca_1", "ca_2", "smult", "pmult"]
+exo = ["s", "seg", "p", "ca_0", "ca_1", "ca_2", "smult", "pmult"]
 
 def mk_scm(ns):
     return {
@@ -92,11 +92,9 @@ def mk_scm(ns):
     }
 
 
-def force_promo(scm, exo, ctxs, promo):
+def do(scm, ctxs, key, value):
 
-    if promo is None:
-        return scm
-
+    exo = exos(scm)
 
     scm1 = {k: wrap_0(lambda kx=k: np.array(ctxs[kx])) for k in exo}
 
@@ -104,17 +102,15 @@ def force_promo(scm, exo, ctxs, promo):
 
     scm3 = {**scm1, **scm2}
 
-    n = len(ctxs["p"])
-    scm3["p"] = wrap_0(lambda: np.full(n, promo))
-    scm3["dp"] = wrap_0(lambda: np.full(n, promo))
-
+    n = len(ctxs[exo[0]])
+    scm3[key] = wrap_0(lambda: np.full(n, value))
 
     return scm3
 
 
 def y_for_promo(scm, exo, ctxs, promo):
 
-    scm_p = force_promo(scm, exo, ctxs, promo)
+    scm_p = do(scm, ctxs, "p", promo)
     ctxs_p = val_all(scm_p)
     pdf = pd.DataFrame(ctxs_p)
 
@@ -131,7 +127,7 @@ def exact_uplift(scm, exo, ctxs):
 def ri(pdf):
     return pdf.reset_index(drop=True)
 
-n = 200000
+n = 500000
 scm = mk_scm(n)
 ctxs = val_all(scm)
 pdf = pd.DataFrame(ctxs)
@@ -166,7 +162,7 @@ uplift2 = uplift_0 * p0 + uplift_1 * p1 + uplift_2 * p2
 print(uplift2)
 
 
-
+exos(scm)
 
 # emnos
 
